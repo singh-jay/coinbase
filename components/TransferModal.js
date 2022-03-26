@@ -11,7 +11,6 @@ export const TransferModal = ({
 }) => {
   const [action, setAction] = useState('send')
   const [selectedToken, setSelectedToken] = useState({})
-  console.log('selectedToken', selectedToken)
   useEffect(() => {
     if (sanityTokens) {
       setSelectedToken(sanityTokens[0])

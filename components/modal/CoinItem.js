@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import imageUrlBuilder from '@sanity/image-url'
 import { client } from '../../lib/sanity'
 import { FaCheck } from 'react-icons/fa'
+import Image from 'next/image'
 export const CoinItem = ({
   token,
   sender,
@@ -14,15 +15,7 @@ export const CoinItem = ({
 }) => {
   const [balance, setBalance] = useState('Fetching')
   const [imageUrl, setImageUrl] = useState(null)
-  console.log(
-    token,
-    sender,
-    selectedToken,
-    setSelectedToken,
-    sanityTokens,
-    thirdWebTokens,
-    setAction
-  )
+
   useEffect(() => {
     const getBalance = async () => {
       let activeThirdWebToken
@@ -51,7 +44,7 @@ export const CoinItem = ({
     if (token) {
       getImageUrl()
     }
-  }, [token, thirdWebTokens])
+  }, [token, thirdWebTokens, sender])
 
   return (
     <Wrapper
@@ -65,7 +58,9 @@ export const CoinItem = ({
     >
       <Main>
         <Icon>
-          <img src={imageUrl} alt={token.name} />
+          {imageUrl && (
+            <Image src={imageUrl} width={100} height={100} alt={token.name} />
+          )}
         </Icon>
         <NameDetails>
           <Name>{token.name}</Name>

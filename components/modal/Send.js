@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { FaWallet } from 'react-icons/fa'
 import imageUrlBuilder from '@sanity/image-url'
 import { client } from '../../lib/sanity'
+import Image from 'next/image'
 export const Send = ({
   selectedToken,
   setAction,
@@ -30,7 +31,7 @@ export const Send = ({
     if (activeToken) {
       setActiveThirdWebToken(activeToken)
     }
-  }, [thirdWebTokens])
+  }, [thirdWebTokens, selectedToken.contractAddress])
   useEffect(() => {
     const getBalance = async () => {
       const balance = await activeThirdWebToken.balanceOf(walletAddress)
@@ -41,7 +42,7 @@ export const Send = ({
     if (activeThirdWebToken) {
       getBalance()
     }
-  }, [activeThirdWebToken])
+  }, [activeThirdWebToken, walletAddress])
 
   const transferCrypto = async () => {
     if (activeThirdWebToken && amount && recipient) {
@@ -89,7 +90,9 @@ export const Send = ({
           <FieldName>Pay with</FieldName>
           <CoinSelectList onClick={() => setAction('select')}>
             <Icon>
-              <img src={imageUrl} />
+              {imageUrl && (
+                <Image src={imageUrl} width={100} height={100} alt='Coin' />
+              )}
             </Icon>
             <CoinName>{selectedToken.name}</CoinName>
           </CoinSelectList>

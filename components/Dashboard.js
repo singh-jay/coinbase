@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { Header } from '../components/Header'
+import { Header } from './Header'
 import styled from 'styled-components'
-import { Main } from '../components/Main'
-import { Sidebar } from '../components/Sidebar'
+import { Main } from './Main'
+import { Sidebar } from './Sidebar'
 import { useWeb3 } from '@3rdweb/hooks'
 import { ThirdwebSDK } from '@3rdweb/sdk'
 import { ethers } from 'ethers'
@@ -40,7 +40,7 @@ export const Dashboard = ({ address }) => {
           setsanityTokens(data.result)
           if (sdk) {
             setThirdWebTokens(
-              data.result.map((token) =>
+              data.result.map(token =>
                 sdk.getTokenModule(token.contractAddress)
               )
             )
@@ -51,7 +51,7 @@ export const Dashboard = ({ address }) => {
       }
     }
     return getData()
-  }, [])
+  }, [sdk])
 
   return (
     <Wrapper>
