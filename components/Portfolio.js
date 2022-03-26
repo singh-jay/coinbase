@@ -22,7 +22,7 @@ export const Portfolio = ({ walletAddress, sanityTokens, thirdWebTokens }) => {
       // }
       // console.log(total)
       const totalBalance = await Promise.all(
-        thirdWebTokens.map(async (token) => {
+        thirdWebTokens.map(async token => {
           balance = await token.balanceOf(walletAddress)
           return Number(balance.displayValue) * tokenToUSD[token.address]
         })
@@ -66,7 +66,7 @@ export const Portfolio = ({ walletAddress, sanityTokens, thirdWebTokens }) => {
             </TableItem>
             <Divider />
             <div>
-              {coins.map((coin) => (
+              {coins.map(coin => (
                 <div key={coin.name}>
                   <Coin coin={coin} />
                   <Divider />
@@ -110,7 +110,7 @@ const BalanceValue = styled.div`
 `
 
 const PortfolioTable = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 0;
   border: 1px solid #282b2f;
 `
 

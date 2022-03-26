@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Modal from 'react-modal'
 import { TransferModal } from './TransferModal'
 Modal.setAppElement('#__next')
-export const Header = ({ walletAddress }) => {
+export const Header = ({ walletAddress, sanityTokens, thirdWebTokens }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const modalStyle = {
     content: {
@@ -40,7 +40,11 @@ export const Header = ({ walletAddress }) => {
         onRequestClose={() => setModalOpen(false)}
         style={modalStyle}
       >
-        <TransferModal />
+        <TransferModal
+          walletAddress={walletAddress}
+          sanityTokens={sanityTokens}
+          thirdWebTokens={thirdWebTokens}
+        />
       </Modal>
     </Wrapper>
   )
